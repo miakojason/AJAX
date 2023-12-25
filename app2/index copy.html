@@ -30,22 +30,22 @@
   <div id="modals">
 
   </div>
-  
+
   <script src="../plugin/js/bootstrap.js"></script>
 </body>
 
 </html>
 <script>
   //宣告modal
-  // const stuModal = new bootstrap.Modal('#studentForm', {
-  //   keyboard: false
-  // })
-
-  // $("#studentForm").on('show.bs.modal', () => {
-  //     $.get("./api/get_schools.php", (options) => {
-  //       $("#schools").html(options)
-  //     })
-  //   }) 
+  /*   const stuModal = new bootstrap.Modal('#studentForm', {
+      keyboard: false
+    })
+  
+    $("#studentForm").on('show.bs.modal', () => {
+      $.get("./api/get_schools.php", (options) => {
+        $("#schools").html(options)
+      })
+    }) */
   let stuModal
   function popForm(type, id = null) {
     $.get('./api/user_form.php', (form) => {
@@ -58,17 +58,17 @@
       })
 
       //註冊modal的顯示事件
-  $("#studentForm").on('show.bs.modal', () => {
-    $.get("./api/get_schools.php", (options) => {
-      $("#schools").html(options)
-    })
-  })
-  
-  //觸發顯示
-  stuModal.show("studentForm")
+      $("#studentForm").on('show.bs.modal', () => {
+        $.get("./api/get_schools.php", (options) => {
+          $("#schools").html(options)
+        })
+      })
 
-})
-}
+      //觸發顯示
+      stuModal.show("studentForm")
+
+    })
+  }
 
   /************************************
   * 1.考慮觸發行為的事件
@@ -85,17 +85,10 @@
   }
 
   //查詢資料的函式
-  // function query(def) {
-  //   def = def.split("=")//取出所有字元，但不包含(=)
-  //   console.log(def)
-  //   $.get("./api/query.php?do=def", { def }, (res) => {
-  //     console.log(res)
-  //   })
-  // }
   function query(type, value) {
     $.get(`./api/query.php?do=${type}`, { value }, (res) => {
       console.log(res)
-      render(res)//rende炫染
+      render(res)
     })
   }
   function queryClasses() {
@@ -122,21 +115,19 @@
     $(".users").html("")
     let data_layout;
     datas.forEach((data, idx) => {
-      data_layout =
-        `<div class="p-2" id='user${data.id}'>
-         <div class="card" style="width: 18rem;">
-               <div class='name text-center bolder fs-3'>${data.name}</div>
-               <div class="card-body">
-                     <h5 class="card-title">${data.school_num}</h5>
-                     <div class="card-text">${data.birthday}</div>
-                     <div class="card-text">${data.uni_id}</div>
-                     <div class='controls'>
-                         <a href="#" class="btn btn-primary">編輯</a>
-                         <a href="Javascript:del(${data.id})" class="btn btn-danger">刪除</a>
-                     </div>
-               </div>
-         </div>
-  </div>`
+      data_layout = `<div class="p-2" id='user${data.id}'>
+      <div class="card" style="width: 18rem;">
+  <div class='name text-center bolder fs-3'>${data.name}</div>
+  <div class="card-body">
+    <h5 class="card-title">${data.school_num}</h5>
+    <div class="card-text">${data.birthday}</div>
+    <div class="card-text">${data.uni_id}</div>
+    <div class='controls'>
+      <a href="#" class="btn btn-primary">編輯</a>
+      <a href="Javascript:del(${data.id})" class="btn btn-danger">刪除</a>
+    </div>
+  </div>
+</div></div>`
 
       $(".users").append(data_layout)
     })
